@@ -33,6 +33,59 @@
 
 ## 使用说明
 
+### 使用 npm 安装
+
+```bash
+npm install @angelofana/emoji.json
+```
+
+```javascript
+// 数组结构
+var emoji_array = require('emoji-array.json');
+console.log(emoji_array[0]);
+/*
+{
+	"codes": "1F600",
+	"char": "😀",
+	"name": "grinning face",
+	"group": "Smileys & Emotion",
+	"subgroup": "face-smiling",
+	"group_i18n": {
+		"en": "Smileys & Emotion",
+		"zh_CN": "表情与情感"
+	},
+	"subgroup_i18n": {
+		"en": "face-smiling",
+		"zh_CN": "脸-微笑"
+	},
+	"name_i18n": {
+		"en": "grinning face",
+		"zh_CN": "笑脸"
+	}
+}
+*/
+
+// 树形结构
+var emoji_tree = require('emoji-tree.json');
+console.log(emoji_tree[0][0]);
+/*
+{
+	"codes": "1F600",
+	"char": "😀",
+	"name": "grinning face",
+	"name_i18n": {
+		"en": "grinning face",
+		"zh_CN": "笑脸"
+	}
+}
+*/
+```
+
+### 使用 CDN 版本
+
+- [https://unpkg.com/@angelofana/emoji.json/emoji-array.json](https://unpkg.com/@angelofana/emoji.json/emoji-array.json)
+- [https://unpkg.com/@angelofana/emoji.json/emoji-tree.json](https://unpkg.com/@angelofana/emoji.json/emoji-tree.json)
+
 ### 直接使用转换好的文件
 
 直接使用 `dist` 目录中的文件
