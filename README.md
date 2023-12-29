@@ -67,7 +67,7 @@ console.log(emoji_array[0]);
 
 // 树形结构
 var emoji_tree = require('emoji-json/emoji-tree.json');
-console.log(emoji_tree[0][0]);
+console.log(emoji_tree[0].list[0].list[0]);
 /*
 {
 	"codes": "1F600",
