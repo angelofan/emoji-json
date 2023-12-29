@@ -4,12 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>emoji数据转换</title>
+    <title>emoji 数据转换</title>
     <script src="https://unpkg.com/jquery@3.7.1/dist/jquery.min.js"></script>
 </head>
 
 <body>
-    <h3>请先按 F12 打开控制台，然后根据提示操作</h3>
+    <h2>请先按 F12 打开控制台，然后根据提示操作</h2>
     <hr>
     <div>
         group_i18n：
@@ -75,13 +75,16 @@
                 console.log('已整理出 [分组]：共'+group_list.length+'条，全局变量：group_list');
                 console.log('已整理出 [次分组]：共'+subgroup_list.length+'条，全局变量：subgroup_list');
                 console.log('已整理出 [名称]：共'+name_list.length+'条，全局变量：name_list');
-                console.log('已准备好可供翻译的条目，全局变量：[group_for_translate], [subgroup_for_translate], [name_for_translate]');
+                console.log('已准备好可供翻译的条目，全局变量：group_for_translate, subgroup_for_translate, name_for_translate');
+                console.log('');
                 console.log('+++++ +++++ +++++ +++++');
                 console.log('+++++ 需要手动操作 +++++');
-                console.log('1. 请在控制台输入 [group_for_translate]');
+                console.log('1. 请在控制台输入并执行 group_for_translate');
                 console.log('2. 将获取到的翻译条目粘贴到 [vscode] 软件中，自行通过正则表达式查找替换等方式提取并翻译数据');
                 console.log('3. 借助 [谷歌翻译] 对结果进行翻译，并转换为 [json]，并在 https://www.bejson.com/ 验证通过，并压缩');
-                console.log('4. 粘贴到页面中的对应区域中，点击 [设置]，全部设置完成后，点击 [输出最终结果]');
+                console.log('4. 粘贴到页面中的对应区域中，点击 [设置]');
+                console.log('5. 一共三个需翻译的变量，请依次重复此流程，全部设置完成后，点击 [输出最终结果]');
+                console.log('');
             });
         });
         function group_i18n_set() {
@@ -89,7 +92,8 @@
                 try {
                     group_i18n = JSON.parse($('#group_i18n').val());
                     localStorage.setItem('group_i18n', JSON.stringify(group_i18n));
-                    console.log('设置 group_i18n 成功');
+                    console.log('设置 group_i18n 成功，已存入本地存储，刷新页面不会丢失此设置');
+                    console.log('');
                 } catch (error) {
                     alert('数据格式错误');
                 }
@@ -102,7 +106,8 @@
                 try {
                     subgroup_i18n = JSON.parse($('#subgroup_i18n').val());
                     localStorage.setItem('subgroup_i18n', JSON.stringify(subgroup_i18n));
-                    console.log('设置 subgroup_i18n 成功');
+                    console.log('设置 subgroup_i18n 成功，已存入本地存储，刷新页面不会丢失此设置');
+                    console.log('');
                 } catch (error) {
                     alert('数据格式错误');
                 }
@@ -115,7 +120,8 @@
                 try {
                     name_i18n = JSON.parse($('#name_i18n').val());
                     localStorage.setItem('name_i18n', JSON.stringify(name_i18n));
-                    console.log('设置 name_i18n 成功');
+                    console.log('设置 name_i18n 成功，已存入本地存储，刷新页面不会丢失此设置');
+                    console.log('');
                 } catch (error) {
                     alert('数据格式错误');
                 }
@@ -140,7 +146,15 @@
                     };
                     export_data.push(emoji);
                 });
-                console.log('导出成功，一共'+export_data.length+'条数据，已存储在全局变量 [export_data] 中');
+                console.log('导出成功，一共'+export_data.length+'条数据，已存储在全局变量 export_data 中');
+                console.log('由于数据结果比较多，默认不自动输出转换结果数据，请根据下面的指引手动导出。');
+                console.log('+++++ +++++ +++++ +++++');
+                console.log('+++++ 数据导出方法 +++++');
+                console.log('1. 在控制台输入并执行 JSON.stringify(export_data)');
+                console.log('2. 复制输出的结果');
+                console.log('3. 打开 [vscode] 新建文件 emoji-converted-array.json 并粘贴');
+                console.log('4. 去掉开头和结尾的单引号');
+                console.log('');
             }else{
                 alert('先设置 i18n 数据');
             }
@@ -191,7 +205,15 @@
                         });
                     }
                 });
-                console.log('导出成功，已存储在全局变量 [export_data_tree] 中');
+                console.log('导出成功，已存储在全局变量 export_data_tree 中');
+                console.log('由于数据结果比较多，默认不自动输出转换结果数据，请根据下面的指引手动导出。');
+                console.log('+++++ +++++ +++++ +++++');
+                console.log('+++++ 数据导出方法 +++++');
+                console.log('1. 在控制台输入并执行 JSON.stringify(export_data_tree)');
+                console.log('2. 复制输出的结果');
+                console.log('3. 打开 [vscode] 新建文件 emoji-converted-tree.json 并粘贴');
+                console.log('4. 去掉开头和结尾的单引号');
+                console.log('');
             }else{
                 alert('请先运行 [导出数组结构]');
             }
