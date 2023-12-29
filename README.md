@@ -41,7 +41,7 @@ npm install @angelofana/emoji-json
 
 ```javascript
 // 数组结构
-var emoji_array = require('emoji-array.json');
+var emoji_array = require('emoji-json/emoji-array.json');
 console.log(emoji_array[0]);
 /*
 {
@@ -66,7 +66,7 @@ console.log(emoji_array[0]);
 */
 
 // 树形结构
-var emoji_tree = require('emoji-tree.json');
+var emoji_tree = require('emoji-json/emoji-tree.json');
 console.log(emoji_tree[0][0]);
 /*
 {
