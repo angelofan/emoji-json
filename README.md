@@ -2,7 +2,17 @@
 
 ## 介绍
 
-emoji.json 的数据转换器，用于将 [npm 包 emoji.json](https://www.npmjs.com/package/emoji.json) 的数据中增加一些字段的 i18n 属性，并在 i18n 属性中添加简体中文翻译。
+此仓库有适配了 简体中文 的 emoji.json 数据源，与 unicode 联盟的数据源保持同步并版本对齐。
+
+另外 此仓库也包含了 [emoji.json](https://github.com/amio/emoji.json) 的数据转换器，包括了所有从 源数据 转换的程序。
+
+将 [emoji.json](https://github.com/amio/emoji.json) 的数据中增加一些字段的 i18n 属性，并在 i18n 属性中添加简体中文翻译。
+
+### 如何与 unicode 联盟的数据源保持同步并版本对齐
+
+正如上文所说，此仓库是基于 [emoji.json](https://github.com/amio/emoji.json) 数据进行二次转换处理的。[emoji.json](https://github.com/amio/emoji.json) 是基于 unicode 联盟发布的的数据源 emoji-test.txt 进行 json 处理的。
+
+所以此仓库视为是间接地与 unicode 联盟的数据源进行同步，并且导出的数据与其版本号保持一致。
 
 ## 功能描述
 
