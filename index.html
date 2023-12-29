@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>emoji数据转换</title>
+    <script src="https://unpkg.com/jquery@3.7.1/dist/jquery.min.js"></script>
+</head>
+
+<body>
+    <div>
+        group_i18n：
+        <textarea id="group_i18n" style="width: 500px; height: 80px;" placeholder='JSON格式，例如：{"Smileys & Emotion":"表情与情感","People & Body":"人与身体"}'></textarea>
+        <button onclick="group_i18n_set()">设置</button>
+    </div>
+    <div>
+        subgroup：
+        <textarea id="subgroup_i18n" style="width: 500px; height: 80px;" placeholder='JSON格式，例如：{"face-smiling":"脸-微笑","face-affection":"面子-感情","face-tongue":"脸-舌头"}'></textarea>
+        <button onclick="subgroup_i18n_set()">设置</button>
+    </div>
+    <div>
+        name：
+        <textarea id="name_i18n" style="width: 500px; height: 80px;" placeholder='JSON格式，例如：{"grinning face":"笑脸","grinning face with big eyes":"笑脸大眼睛","grinning face with smiling eyes":"笑脸和微笑的眼睛"}'></textarea>
+        <button onclick="name_i18n_set()">设置</button>
+    </div>
+    <hr>
+    <button onclick="do_export_data()">输出最终结果</button>
+    <script>
+        var emoji_json = [];
+
+        var group_list = [];
+        var group_for_translate = '';
+        var group_i18n = localStorage.getItem('group_i18n') ? JSON.parse(localStorage.getItem('group_i18n')) : {};
+
+        var subgroup_list = [];
+        var subgroup_for_translate = '';
+        var subgroup_i18n =  localStorage.getItem('subgroup_i18n') ? JSON.parse(localStorage.getItem('subgroup_i18n')) :{};
+
+        var name_list = [];
+        var name_for_translate = '';
+        var name_i18n = localStorage.getItem('name_i18n') ? JSON.parse(localStorage.getItem('name_i18n')) : {};
+
+        var export_data = [];
+        
+        $('#group_i18n').text(JSON.stringify(group_i18n));
+        $('#subgroup_i18n').text(JSON.stringify(subgroup_i18n));
+        $('#name_i18n').text(JSON.stringify(name_i18n));
+        $.getJSON('https://registry.npmjs.org/emoji.json', (json) => {
+            var version = json['dist-tags']['latest'];
+            console.log('检查 emoji.json 包的最新版本号：'+version);
+            $.getJSON('https://unpkg.com/emoji.json@'+version+'/emoji.json', (json) => {
+                emoji_json = json;
+                console.log('已获取到 json 原始数据：共'+json.length+'条，全局变量：emoji_json');
+                json.forEach(emoji => {
+                    if (!group_list.includes(emoji.group)) {
+                        group_list.push(emoji.group);
+                    }
+                    if (!subgroup_list.includes(emoji.subgroup)) {
+                        subgroup_list.push(emoji.subgroup);
+                    }
+                    if (!name_list.includes(emoji.name)) {
+                        name_list.push(emoji.name);
+                    }
+                });
+                group_for_translate = group_list.join('$$$');
+                subgroup_for_translate = subgroup_list.join('$$$');
+                name_for_translate = name_list.join('$$$');
+                console.log('已整理出 [分组]：共'+group_list.length+'条，全局变量：group_list');
+                console.log('已整理出 [次分组]：共'+subgroup_list.length+'条，全局变量：subgroup_list');
+                console.log('已整理出 [名称]：共'+name_list.length+'条，全局变量：name_list');
+                console.log('已准备好可供翻译的条目，全局变量：[group_for_translate], [subgroup_for_translate], [name_for_translate]');
+                console.log('+++++ +++++ +++++ +++++');
+                console.log('+++++ 需要手动操作 +++++');
+                console.log('1. 请在控制台输入 [group_for_translate]');
+                console.log('2. 将获取到的翻译条目粘贴到 [vscode] 软件中，自行通过正则表达式查找替换等方式提取并翻译数据');
+                console.log('3. 借助 [谷歌翻译] 对结果进行翻译，并转换为 [json]，并在 https://www.bejson.com/ 验证通过，并压缩');
+                console.log('4. 粘贴到页面中的对应区域中，点击 [设置]，全部设置完成后，点击 [输出最终结果]');
+            });
+        });
+        function group_i18n_set() {
+            if($('#group_i18n').val()){
+                try {
+                    group_i18n = JSON.parse($('#group_i18n').val());
+                    localStorage.setItem('group_i18n', JSON.stringify(group_i18n));
+                    console.log('设置 group_i18n 成功');
+                } catch (error) {
+                    alert('数据格式错误');
+                }
+            }else{
+                alert('请输入数据');
+            }
+        }
+        function subgroup_i18n_set() {
+            if($('#subgroup_i18n').val()){
+                try {
+                    subgroup_i18n = JSON.parse($('#subgroup_i18n').val());
+                    localStorage.setItem('subgroup_i18n', JSON.stringify(subgroup_i18n));
+                    console.log('设置 subgroup_i18n 成功');
+                } catch (error) {
+                    alert('数据格式错误');
+                }
+            }else{
+                alert('请输入数据');
+            }
+        }
+        function name_i18n_set() {
+            if($('#name_i18n').val()){
+                try {
+                    name_i18n = JSON.parse($('#name_i18n').val());
+                    localStorage.setItem('name_i18n', JSON.stringify(name_i18n));
+                    console.log('设置 name_i18n 成功');
+                } catch (error) {
+                    alert('数据格式错误');
+                }
+            }else{
+                alert('请输入数据');
+            }
+        }
+        function do_export_data() {
+            if($('#group_i18n').val() && $('#subgroup_i18n').val() && $('#name_i18n').val()){
+                emoji_json.forEach((emoji)=>{
+                    emoji.group_i18n = {
+                        en: emoji.group,
+                        zh_CN: group_i18n[emoji.group] ?? '',
+                    };
+                    emoji.subgroup_i18n = {
+                        en: emoji.subgroup,
+                        zh_CN: subgroup_i18n[emoji.subgroup] ?? '',
+                    };
+                    emoji.name_i18n = {
+                        en: emoji.name,
+                        zh_CN: name_i18n[emoji.name] ?? '',
+                    };
+                    export_data.push(emoji);
+                });
+                console.log('导出成功，一共'+export_data.length+'条数据，已存储在全局变量 [export_data] 中');
+            }else{
+                alert('先设置 i18n 数据');
+            }
+        }
+    </script>
+</body>
+
+</html>
