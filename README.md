@@ -1,4 +1,4 @@
-# emoji.json_convert
+# emoji-json
 
 ## 介绍
 
@@ -36,7 +36,7 @@
 ### 使用 npm 安装
 
 ```bash
-npm install @angelofana/emoji.json
+npm install @angelofana/emoji-json
 ```
 
 ```javascript
@@ -83,18 +83,14 @@ console.log(emoji_tree[0][0]);
 
 ### 使用 CDN 版本
 
-- [https://unpkg.com/@angelofana/emoji.json/emoji-array.json](https://unpkg.com/@angelofana/emoji.json/emoji-array.json)
-- [https://unpkg.com/@angelofana/emoji.json/emoji-tree.json](https://unpkg.com/@angelofana/emoji.json/emoji-tree.json)
+- [https://unpkg.com/@angelofana/emoji-json/emoji-array.json](https://unpkg.com/@angelofana/emoji-json/emoji-array.json)
+- [https://unpkg.com/@angelofana/emoji-json/emoji-tree.json](https://unpkg.com/@angelofana/emoji-json/emoji-tree.json)
 
 ### 直接使用转换好的文件
 
 直接使用 `dist` 目录中的文件
 
 ### 自己动手进行转换
-
-#### 使用 Gitee Pages 在线转换
-
-https://angelofan.gitee.io/emoji.json_convert/
 
 #### 下载到本地进行转换
 
