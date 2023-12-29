@@ -132,6 +132,7 @@
         function do_export_data() {
             if($('#group_i18n').val() && $('#subgroup_i18n').val() && $('#name_i18n').val()){
                 emoji_json.forEach((emoji)=>{
+                    delete emoji.category;
                     emoji.group_i18n = {
                         en: emoji.group,
                         zh_CN: group_i18n[emoji.group] ?? '',
