@@ -9,6 +9,8 @@
 </head>
 
 <body>
+    <h3>请先按 F12 打开控制台，然后根据提示操作</h3>
+    <hr>
     <div>
         group_i18n：
         <textarea id="group_i18n" style="width: 500px; height: 80px;" placeholder='JSON格式，例如：{"Smileys & Emotion":"表情与情感","People & Body":"人与身体"}'></textarea>
@@ -25,7 +27,9 @@
         <button onclick="name_i18n_set()">设置</button>
     </div>
     <hr>
-    <button onclick="do_export_data()">输出最终结果</button>
+    <button onclick="do_export_data()">导出数组结构</button>
+    <hr>
+    <button onclick="do_export_data_tree()">导出树形结构</button>
     <script>
         var emoji_json = [];
 
@@ -42,6 +46,8 @@
         var name_i18n = localStorage.getItem('name_i18n') ? JSON.parse(localStorage.getItem('name_i18n')) : {};
 
         var export_data = [];
+
+        var export_data_tree = [];
         
         $('#group_i18n').text(JSON.stringify(group_i18n));
         $('#subgroup_i18n').text(JSON.stringify(subgroup_i18n));
@@ -137,6 +143,57 @@
                 console.log('导出成功，一共'+export_data.length+'条数据，已存储在全局变量 [export_data] 中');
             }else{
                 alert('先设置 i18n 数据');
+            }
+        }
+        function do_export_data_tree() {
+            if(export_data.length > 0){
+                export_data.map((emoji)=>{
+                    const group = emoji.group;
+                    const group_i18n = emoji.group_i18n;
+                    const subgroup = emoji.subgroup;
+                    const subgroup_i18n = emoji.subgroup_i18n;
+                    delete emoji.group;
+                    delete emoji.group_i18n;
+                    delete emoji.subgroup;
+                    delete emoji.subgroup_i18n;
+                    delete emoji.category;
+                    var group_index = -1;
+                    export_data_tree.map((item, index)=>{
+                        if(item.name === group){
+                            group_index = index;
+                        }
+                    });
+                    if (group_index >= 0) {
+                        var subgroup_index = -1;
+                        export_data_tree[group_index].list.map((item, index)=>{
+                            if(item.name === subgroup){
+                                subgroup_index = index;
+                            }
+                        });
+                        if (subgroup_index >= 0) {
+                            export_data_tree[group_index].list[subgroup_index]['list'].push(emoji);
+                        }else{
+                            export_data_tree[group_index].list.push({
+                                name: subgroup, 
+                                name_i18n: subgroup_i18n,
+                                list: [emoji],
+                            });
+                        }
+                    }else{
+                        export_data_tree.push({
+                            name: group, 
+                            name_i18n: group_i18n,
+                            list: [{
+                                name: subgroup, 
+                                name_i18n: subgroup_i18n,
+                                list: [emoji]
+                            }],
+                        });
+                    }
+                });
+                console.log('导出成功，已存储在全局变量 [export_data_tree] 中');
+            }else{
+                alert('请先运行 [导出数组结构]');
             }
         }
     </script>
