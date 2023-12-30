@@ -31,6 +31,16 @@
 
 树形结构 是基于 数组结构 的运行结果进行二次处理的，所以在运行 树形结构 之前，要先运行一次 数组结构。
 
+## 数据结构
+
+### 数组结构
+
+emoji-array.json
+
+```json
+
+```
+
 ## 使用说明
 
 ### 使用 npm 安装
@@ -40,63 +50,41 @@ npm install @angelofana/emoji-json
 ```
 
 ```javascript
-// 数组结构
+// 数组结构 emoji-array
 var emoji_array = require('emoji-json/emoji-array.json');
-console.log(emoji_array[0]);
-/*
-{
-	"codes": "1F600",
-	"char": "😀",
-	"name": "grinning face",
-	"group": "Smileys & Emotion",
-	"subgroup": "face-smiling",
-	"group_i18n": {
-		"en": "Smileys & Emotion",
-		"zh_CN": "表情与情感"
-	},
-	"subgroup_i18n": {
-		"en": "face-smiling",
-		"zh_CN": "脸-微笑"
-	},
-	"name_i18n": {
-		"en": "grinning face",
-		"zh_CN": "笑脸"
-	}
-}
-*/
+console.log(emoji_array);
 
-// 树形结构
+// 树形结构 emoji-tree
 var emoji_tree = require('emoji-json/emoji-tree.json');
-console.log(emoji_tree[0].list[0].list[0]);
-/*
-{
-	"codes": "1F600",
-	"char": "😀",
-	"name": "grinning face",
-	"name_i18n": {
-		"en": "grinning face",
-		"zh_CN": "笑脸"
-	}
-}
-*/
+console.log(emoji_tree);
 ```
 
 ### 使用 CDN 版本
 
-- [https://unpkg.com/@angelofana/emoji-json/emoji-array.json](https://unpkg.com/@angelofana/emoji-json/emoji-array.json)
-- [https://unpkg.com/@angelofana/emoji-json/emoji-tree.json](https://unpkg.com/@angelofana/emoji-json/emoji-tree.json)
+依赖 jQuery 1.0 以上版本
 
-### 直接使用转换好的文件
+```html
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script>
+    // 数组结构 emoji-array
+    var emoji_array = $.ajax({url:"https://unpkg.com/@angelofana/emoji-json@15.1.0/emoji-array.json",async:false}).responseJSON;
+    console.log(emoji_array);
 
-直接使用 `dist` 目录中的文件
+    // 树形结构 emoji-tree
+    var emoji_tree = $.ajax({url:"https://unpkg.com/@angelofana/emoji-json@15.1.0/emoji-tree.json",async:false}).responseJSON;
+    console.log(emoji_tree);
+</script>
+```
+
+### 私有部署
+
+将 `emoji-array.json` 和 `emoji-tree.json` 粘贴到自己的项目中
 
 ### 自己动手进行转换
 
-#### 下载到本地进行转换
-
-1.  克隆仓库
-2.  直接运行 index.html 文件
-3.  按 F12 打开控制台，查看提示并完成转换
+1.  克隆仓库 `git clone https://github.com/angelofan/emoji-json.git`
+2.  运行 `index.html`
+3.  按 `F12` 打开控制台，查看提示并完成转换
 
 ## 开源许可证
 
