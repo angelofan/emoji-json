@@ -1,6 +1,6 @@
 {
   "name": "@angelofana/emoji-json",
-  "version": "15.1.0",
+  "version": "15.1.1",
   "description": "适配了 简体中文 的 emoji.json 数据源，与 unicode 联盟的数据源保持同步并版本对齐",
   "main": "emoji-array.json",
   "scripts": {

@@ -133,11 +133,11 @@ console.log(emoji_tree);
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
     // 数组结构 emoji-array
-    var emoji_array = $.ajax({url:"https://unpkg.com/@angelofana/emoji-json@15.1.0/emoji-array.json",async:false}).responseJSON;
+    var emoji_array = $.ajax({url:"https://unpkg.com/@angelofana/emoji-json@15.1.1/emoji-array.json",async:false}).responseJSON;
     console.log(emoji_array);
 
     // 树形结构 emoji-tree
-    var emoji_tree = $.ajax({url:"https://unpkg.com/@angelofana/emoji-json@15.1.0/emoji-tree.json",async:false}).responseJSON;
+    var emoji_tree = $.ajax({url:"https://unpkg.com/@angelofana/emoji-json@15.1.1/emoji-tree.json",async:false}).responseJSON;
     console.log(emoji_tree);
 </script>
 ```
